@@ -28,5 +28,36 @@ module.exports = {
             return res.status(400).json({ status: validationResultFavorite.error.details, message: 'Oops! Not Status'})
         }
         next()
-    }
+    },
+    authValidation: (req, res, next) => {
+        const schema = Joi.object({
+            password: Joi.string().required(),
+            email: Joi.string().required(),
+            subscription: Joi.string().required(),
+            token: Joi.string()
+        })
+
+        const validationResultFavorite = schema.validate(req.body);
+        if(validationResultFavorite.error){
+            return res.status(400).json({ status: validationResultFavorite.error.details, message: 'Oops! Not Status'})
+        }
+        next()
+    },
+    
+    loginValidation: (req, res, next) => {
+        const schema = Joi.object({
+            password: Joi.string().required(),
+            email: Joi.string().required(),
+            token: Joi.string()
+        })
+
+        const validationResultFavorite = schema.validate(req.body);
+        if(validationResultFavorite.error){
+            return res.status(400).json({ status: validationResultFavorite.error.details, message: 'Oops! Not Status'})
+        }
+        next()
+    },
+    
+
+
 }
