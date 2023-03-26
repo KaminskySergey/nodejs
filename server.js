@@ -1,5 +1,17 @@
 const app = require('./app')
+require('dotenv').config();
+const mongoose = require('mongoose');
 
-app.listen(3000, () => {
-  console.log("Server running. Use our API on port: 3000")
+
+mongoose.connect(process.env.MANGO_URL).then(() => {
+  app.listen(3000, () => {
+    console.log("Database connection successful")
+  })
+
+}).catch((err) => {
+console.log(err)
+process.exit(1)
 })
+
+
+
