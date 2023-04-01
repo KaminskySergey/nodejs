@@ -13,7 +13,7 @@ const authMiddlevares = async (req, res, next) => {
 
 try {
     if(bearer !== "Bearer"){
-        return res.status(401).json({ message: "Not authorized1" })
+        return res.status(401).json({ message: "Not authorized" })
     }
     
     const {id} = jwt.verify(token, SECRET_KEY)
