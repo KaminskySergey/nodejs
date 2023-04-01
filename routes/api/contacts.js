@@ -1,25 +1,24 @@
 const express = require('express')
+const { contacts } = require('../../controllers')
+const { addValidation, addValidationFavorite } = require('../../middlewares/validationMiddlevares')
+const { authMiddlevares } = require('../../middlewares/autorizationMiddlevares')
+
+
 
 const router = express.Router()
 
-router.get('/', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+router.get('/', authMiddlevares, contacts.getContact)
 
-router.get('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+router.get('/:contactId', contacts.getContactId)
 
-router.post('/', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+router.post('/', authMiddlevares, addValidation, contacts.getContactPost)
 
-router.delete('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+router.put('/:contactId', addValidation, contacts.getContactPut)
 
-router.put('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+router.patch('/:contactId/:favorite', addValidationFavorite, contacts.getUpdateStatusContact)
+
+router.delete('/:contactId', contacts.getContactDelete)
+
 
 module.exports = router
+
