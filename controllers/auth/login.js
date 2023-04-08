@@ -11,8 +11,8 @@ const login = async (req, res) => {
     const user = await User.findOne({email})
     console.log(user, 'user')
     const passCompare = bcrypt.compareSync(password, user.password)
-    if(!user || !passCompare){
-        return res.status(401).json({ message: "Email or password is wrong" })
+    if(!user || !user.verify ||  !passCompare){
+        return res.status(401).json({ message: "Email or password is wrong; Verify is wront" })
     }
     
     
